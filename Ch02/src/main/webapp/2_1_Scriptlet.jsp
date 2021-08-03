@@ -3,15 +3,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title> 2_1_Scriptlet </title>
-	<!-- 
-		날짜 : 2021/08/03 13:16
-		이름 : 박은비
-		내용 : JSP 스크립트릿(Scriptlet) 실습하기 교재 p106
-	 -->
+	<title>2_1_scriptlet</title>
 </head>
 <body>
-	<h3>1.Scriptlet 기본</h3>
+	
 	
 </body>
 </html>
