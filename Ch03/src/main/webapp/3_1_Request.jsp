@@ -110,7 +110,38 @@
 	</form>
 	
 	
+	<hr>
 	
+	<h4>request 내장객체 정보</h4>
+	<table border="1">
+		<tr>
+			<td>헤어정보</td>
+			<td><%= request.getHeader("User-Agent") %></td>
+		</tr>
+		<tr>
+			<!-- HTTP 요청하고 요청 받으면 끊김. -->
+			<td>통신규약</td>
+			<td><%= request.getProtocol() %></td>
+		</tr>
+		<tr>
+			<td>서버이름</td>
+			<td><%= request.getServerName() %></td>
+		</tr>
+		<tr>
+			<td>요청주소</td>
+			<td><%= request.getRequestURL() %></td>
+		</tr>
+		<tr>
+			<td>요청경로</td>
+			<td><%= request.getRequestURI() %></td>
+		</tr>
+		<tr>
+			<td>클라이언트 시스템 IP</td>
+			<td><%= request.getRemoteAddr() %></td>
+		</tr>
+	</table>
+	
+	<!-- request.get => 정보를 가져오다. -->
 </body>
 </html>
 
