@@ -1,22 +1,118 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="/JBoard1/css/style.css"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		
+    		//아이디 중복 체크
+    		$('input[name=uid]').focusout(function(){
+    			//alert('포커스 아웃!');
+    			var uid = $(this).val();
+    			
+    			$.ajax({
+    				url: '/JBoard1/user/proc/checkUid.jsp?uid='+ uid,
+    				type: 'get',
+    				dataType: 'json',
+    				success: function(data){ //1 또는 0 반환
+    					//alert(data.result);
+    					if(data.result == 1){
+    						//alert('이미 사용중인 아이디 입니다.');
+    						$('.resultId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
+    					}else{
+    						//alert('사용 가능한 아이디 입니다.');
+    						$('.resultId').css('color', 'green').text('사용 가능한 아이디 입니다.');
+    					}
+    				
+    				}
+    			});
+    		});
+    		
+			// 닉네임 중복 체크 nick
+			$('input[name=nick]').focusout(function(){
+				
+				var nick = $(this).val();
+				
+				$.ajax({
+					url: '/JBoard1/user/proc/checkNick.jsp?nick='+ nick,
+					type: 'get',
+					dataType: 'json',
+					success: function(data){
+						if(data.result == 1 ){
+							$('.resultNick').css('color', 'red').text('이미 사용중인 닉네임입니다.');
+						}else{
+							$('.resultNick').css('color', 'green').text('사용 가능한 닉네임입니다.');
+						}
+					}
+				});
+			})
+    		
+			// 이메일 중복 체크 email
+			$('input[name=email]').focusout(function(){
+				
+				var email = $(this).val();
+				
+				$.ajax({
+					url: '/JBoard1/user/proc/checkEmail.jsp?email='+ email,
+					type: 'get',
+					dataType: 'json',
+					success: function(data){
+						if(data.result == 1) {
+							$('.resultEmail').css('color', 'red').text('이미 사용중인 이메일입니다.');
+						}else{
+							$('.resultEmail').css('color', 'green').text('사용 가능한 닉네임입니다.');
+						}
+					}
+				});
+			})
+			
+			// 휴대폰 중복 체크 hp
+			$('input[name=hp]').focusout(function(){
+				
+				var hp = $(this).val();
+				
+				$.ajax({
+					url: '/JBoard1/user/proc/checkHp.jsp?hp=' + hp, 
+					type: 'get',
+					datatype: 'json',
+					success: function(data){
+						if(data.result == 1) {
+							$('.resultHp').css('color', 'red').text('이미 사용중인 전화번호입니다.');
+						}else{
+							$('.resultHp').css('color', 'green').text('사용 가능한 전화번호입니다.');
+						}
+					}
+					
+				});
+				
+			})
+			
+			
+			
+    		
+    	});//$(document)
+    
+    </script>
+    
 </head>
 <body>
     <div id="wrapper">
         <section id="user" class="register">
-            <form action="#" method="POST">
+            <form action="/JBoard1/user/proc/registerProc.jsp" method="POST">
                 <table border="1">
                     <caption>사이트 이용정보 입력</caption>
                     <tr>
                         <td>아이디</td>
                         <td>
                             <input type="text" name="uid" placeholder="아이디 입력"/>
-                            <span class="resultId"></span>
+                            <span class="resultId">  </span>
                         </td>
                     </tr>
                     <tr>
@@ -53,12 +149,14 @@
                         <td>E-Mail</td>
                         <td>
                             <input type="email" name="email" placeholder="이메일 입력"/>
+                        	<span class="resultEmail">  </span>
                         </td>
                     </tr>
                     <tr>
                         <td>휴대폰</td>
                         <td>
                             <input type="text" name="hp" placeholder="- 포함 13자리 입력" minlength="13" maxlength="13" />
+                        	<span class="resultHp">  </span>
                         </td>
                     </tr>
                     <tr>
@@ -79,8 +177,8 @@
                 </table>
 
                 <div>
-                    <a href="./login.jsp" class="btnCancel">취소</a>
-                    <input type="submit"   class="btnJoin" value="회원가입"/>
+                    <a href="/JBoard1/user/login.jsp" class="btnCancel">취소</a>
+                    <input type="submit" class="btnJoin" value="회원가입"/>
                 </div>
 
             </form>
