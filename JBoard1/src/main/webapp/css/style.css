@@ -1,17 +1,18 @@
-/* 초기화 */
+/* 전체 */
 * {
     margin: 0;
     padding: 0;
-    font: normal 12px '돋움';
+    font: normal 12px '�룍��';
 }
 
 ul, ol {list-style: none;}
 a {text-decoration: none; color: #111;}
 input, textarea {outline: none;}
 body {}
+
 #wrapper {}
 
-/* 회원-로그인 */
+/* 로그인 */
 #user {}
 #user.login {
     width: 360px;
@@ -64,7 +65,7 @@ body {}
     float: right;
 }
 
-/* 회원-약관 */
+/* 개인정보 동의 */
 #user.terms {
     width: 600px;
     margin: 60px auto;            
@@ -112,7 +113,9 @@ body {}
 #user.terms > div > a:nth-child(1) {background: #fdfdfd;}
 #user.terms > div > a:nth-child(2) {background: #e9e9e9;}
 
-/* 회원-회원가입 */
+
+
+/* �쉶�썝-�쉶�썝媛��엯 */
 #user.register {
     width: 600px;
     height: auto;
@@ -181,7 +184,8 @@ body {}
     color: #111;
 }
 
-/* 게시판 - 공통 */
+
+/* 寃뚯떆�뙋 - 怨듯넻 */
 #board {
     width: 720px;
     margin: 60px auto;            
@@ -190,7 +194,7 @@ body {}
 #board table {
     width: 100%;
     border-top: 2px solid #111;
-    /* 테이블 셀 사이 */
+    /* �뀒�씠釉� �� �궗�씠 */
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 6px;
@@ -233,7 +237,8 @@ body {}
 #board .btnModify { padding: 8px; border: 1px solid #bebebe; background: #fdfdfd; color: #111;}
 #board .btnList   { padding: 8px; border: 1px solid #bebebe; background: #fdfdfd; color: #111;}
 
-/* 게시판 - 글목록 */
+
+/* 글 목록 */
 #board.list {
     position: relative;
 }
@@ -272,7 +277,9 @@ body {}
     bottom: 14px;
     right: 0;
 }
-/* 게시판-글보기 */
+
+
+/* 글 보기 */
 #board.view > div {
     padding: 16px 0;
     text-align: right;
@@ -323,14 +330,14 @@ body {}
     text-align: right;
 }
 
-/* 게시판-글쓰기 */
+/* 글쓰기 */
 #board.write {}
 #board.write form > div {
     margin-top: 10px;
     text-align: right;
 }
 
-/* 게시판-글수정 */
+/* 수정 */
 #board.modify form > div {
     margin-top: 10px;
     text-align: right;

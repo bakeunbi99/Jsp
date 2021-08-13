@@ -7,99 +7,11 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="/JBoard1/css/style.css"/>
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-    	$(document).ready(function(){
-    		
-    		//아이디 중복 체크
-    		$('input[name=uid]').focusout(function(){
-    			//alert('포커스 아웃!');
-    			var uid = $(this).val();
-    			
-    			$.ajax({
-    				url: '/JBoard1/user/proc/checkUid.jsp?uid='+ uid,
-    				type: 'get',
-    				dataType: 'json',
-    				success: function(data){ //1 또는 0 반환
-    					//alert(data.result);
-    					if(data.result == 1){
-    						//alert('이미 사용중인 아이디 입니다.');
-    						$('.resultId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
-    					}else{
-    						//alert('사용 가능한 아이디 입니다.');
-    						$('.resultId').css('color', 'green').text('사용 가능한 아이디 입니다.');
-    					}
-    				
-    				}
-    			});
-    		});
-    		
-			// 닉네임 중복 체크 nick
-			$('input[name=nick]').focusout(function(){
-				
-				var nick = $(this).val();
-				
-				$.ajax({
-					url: '/JBoard1/user/proc/checkNick.jsp?nick='+ nick,
-					type: 'get',
-					dataType: 'json',
-					success: function(data){
-						if(data.result == 1 ){
-							$('.resultNick').css('color', 'red').text('이미 사용중인 닉네임입니다.');
-						}else{
-							$('.resultNick').css('color', 'green').text('사용 가능한 닉네임입니다.');
-						}
-					}
-				});
-			})
-    		
-			// 이메일 중복 체크 email
-			$('input[name=email]').focusout(function(){
-				
-				var email = $(this).val();
-				
-				$.ajax({
-					url: '/JBoard1/user/proc/checkEmail.jsp?email='+ email,
-					type: 'get',
-					dataType: 'json',
-					success: function(data){
-						if(data.result == 1) {
-							$('.resultEmail').css('color', 'red').text('이미 사용중인 이메일입니다.');
-						}else{
-							$('.resultEmail').css('color', 'green').text('사용 가능한 닉네임입니다.');
-						}
-					}
-				});
-			})
-			
-			// 휴대폰 중복 체크 hp
-			$('input[name=hp]').focusout(function(){
-				
-				var hp = $(this).val();
-				
-				$.ajax({
-					url: '/JBoard1/user/proc/checkHp.jsp?hp=' + hp, 
-					type: 'get',
-					datatype: 'json',
-					success: function(data){
-						if(data.result == 1) {
-							$('.resultHp').css('color', 'red').text('이미 사용중인 전화번호입니다.');
-						}else{
-							$('.resultHp').css('color', 'green').text('사용 가능한 전화번호입니다.');
-						}
-					}
-					
-				});
-				
-			})
-			
-			
-			
-    		
-    	});//$(document)
-    
-    </script>
+    <script src="/JBoard1/js/checkUser.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
+	<script src="/JBoard1/js/zipcode.js"></script>
+    <script src="/JBoard1/js/validation.js"></script>
     
 </head>
 <body>
@@ -135,6 +47,7 @@
                         <td>이름</td>
                         <td>
                             <input type="text" name="name" placeholder="이름 입력"/>                            
+                        	<span class="resultName"></span>
                         </td>
                     </tr>
                     <tr>
@@ -163,14 +76,14 @@
                         <td>주소</td>
                         <td>
                             <div>
-                                <input type="text" name="zip" placeholder="우편번호" readonly/>
-                                <button class="btnZip">주소검색</button>
+                                <input type="text" id="zip" name="zip" placeholder="우편번호" readonly/>
+                                <button type="button" class="btnZip" onclick="zipcode()">주소검색</button>
                             </div>                            
                             <div>
-                                <input type="text" name="addr1" placeholder="주소를 검색하세요." readonly/>
+                                <input type="text" id="addr1" name="addr1" placeholder="주소를 검색하세요." readonly/>
                             </div>
                             <div>
-                                <input type="text" name="addr2" placeholder="상세주소를 입력하세요."/>
+                                <input type="text" id="addr2" name="addr2" placeholder="상세주소를 입력하세요."/>
                             </div>
                         </td>
                     </tr>

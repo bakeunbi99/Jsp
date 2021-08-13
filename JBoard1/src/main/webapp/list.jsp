@@ -1,12 +1,23 @@
+<%@page import="kr.co.jboard1.bean.MemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	//로그인을 해야지 사용자 정보 객체가 세션에 저장
+	MemberBean mb = (MemberBean)session.getAttribute("sessMember");
 
+	if(mb == null){
+		//로그인을 하지 않고 리스트 페이지를 요청 했을 때.
+		response.sendRedirect("/JBoard1/user/login.jsp?succesc=102");
+		
+		return;
+	}
+%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>글목록</title>
-    <link rel="stylesheet" href="./css/style.css">    
+    <link rel="stylesheet" href="/JBoard1/css/style.css">    
 </head>
 <body>
     <div id="wrapper">
@@ -14,8 +25,8 @@
             <h3>글목록</h3>
             <article>
                 <p>
-                    홍길동님 반갑습니다.
-                    <a href="./user/login.jsp" class="logout">[로그아웃]</a>
+                    <%= mb.getNick() %>님 반갑습니다.
+                    <a href="/JBoard1/user/proc/logoutProc.jsp" class="logout">[로그아웃]</a>
                 </p>
                 <table border="0">
                     <tr>
@@ -51,3 +62,4 @@
     </div>    
 </body>
 </html>
+

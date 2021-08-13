@@ -1,18 +1,20 @@
 package kr.co.jboard1.bean;
 
+import kr.co.jboard1.db.DBConfig;
+
 public class TermsBean {
 	
-	private String terms; 
-	private String privacy;
+	private String terms; //ì´ìš©ì•½ê´€
+	private String privacy; //ê°œì¸ì •ë³´
 	
-	//ÀÌ¿ë¾à°ü
+	
 	public String getTerms() {
 		return terms;
 	}
 	public void setTerms(String terms) {
 		this.terms = terms;
 	}
-	//°³ÀÎÁ¤º¸
+	
 	public String getPrivacy() {
 		return privacy;
 	}
