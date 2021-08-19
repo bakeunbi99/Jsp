@@ -23,6 +23,36 @@ public class ArticleDao {
 	
 	private ArticleDao() {}
 	
+	public int selectCountComment() {
+		int count = 0;
+		try {
+			//1, 2단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_COMMENT);
+			//4단계
+			ResultSet rs = psmt.executeQuery();
+			//5단계
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			// 6단계
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+	
+	
+	
+	/*
+	 게시물 총 개수
+	 */
 	public int selectCountTotal() {
 		int total = 0;
 		
@@ -206,6 +236,25 @@ public class ArticleDao {
 		
 	}
 	
+	public void updateCommentCount(String parent, int type) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = null;
+			
+			if(type > 0) {
+				
+			}else {
+				
+			}
+			
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void updateArticle() {}
 	
 	public void updateArticleHit(String seq) {
@@ -227,6 +276,32 @@ public class ArticleDao {
 	}
 	
 	public void deleteArticle() {}
+	
+	
+	/*
+	 댓글 삭제
+	 */
+	public void deleteComment(String seq) {
+		
+		try{
+			//1,2 단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, seq);
+			//4단계
+			psmt.executeQuery();
+			//5단계
+			//6단계
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		
+	}
 	
 	
 	

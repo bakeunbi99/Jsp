@@ -3,7 +3,7 @@ package kr.co.jboard1.bean;
 public class ArticleBean {
 
 	private int seq;		//시퀀스
-	private int parent;		//
+	private int parent;		//부모 글 번호
 	private int comment;	//댓글
 	private String cate;	//
 	private String title;	//글제목

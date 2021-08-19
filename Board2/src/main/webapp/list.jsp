@@ -20,6 +20,7 @@
 	
 	// 전송 데이터 수신
 	request.setCharacterEncoding("utf-8");
+	
 	String pg = request.getParameter("pg");
 	
 	if(pg == null){
@@ -48,8 +49,14 @@
 		groupEnd = lastPageNum;
 	}
 	
+	
+	
+	
+	
 	// 게시물 가져오기
 	List<ArticleBean> articles = ArticleDao.getInstance().selectArticles(start);
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -83,6 +90,7 @@
                         <td><%= article.getNick() %></td>
                         <td><%= article.getRdate().substring(2, 10) %></td>
                         <td><%= article.getHit() %></td>
+                        
                     </tr>
                     <% } %>
                 </table>
@@ -106,8 +114,11 @@
 
             <!-- 글쓰기 버튼 -->
             <a href="/Jboard1/write.jsp?pg=<%= pg %>" class="btnWrite">글쓰기</a>
-
+			
         </section>
-    </div>    
+    </div>
+    
+    
 </body>
 </html>
+

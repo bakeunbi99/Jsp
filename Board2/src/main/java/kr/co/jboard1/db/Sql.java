@@ -72,6 +72,18 @@ public class Sql {
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `Jboard_article` SET `hit` = `hit` + 1 "
 												  + "WHERE `seq`=?;";
 
+	// 댓글 수 카운트
+	public static final String UPDATE_COMMENT_COUNT_PLUS = "";
+	public static final String UPDATE_COMMENT_COUNT_MINUS = "";
+	
+	
+	
+	public static final String SELECT_COUNT_COMMENT = "SELECT COUNT(*) FROM `Jboard_article` AS a JOIN `Jboard_article` b ON a.seq = b.parent WHERE a.seq = ?;";
+	
+	
+	//댓글 삭제
+	public static final String DELETE_COMMENT = "DELETE FROM `Jboard_article` WHERE `seq` = ?;";	
+	
 
 }
 

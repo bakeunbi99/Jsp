@@ -58,8 +58,10 @@
                 </tr>
             </table>
             <div>
+            <% if( mb.getUid().equals(article.getUid()) ) { %>
                 <a href="#" class="btnDelete">삭제</a>
                 <a href="/Jboard1/modify.jsp" class="btnModify">수정</a>
+             <%} %>
                 <a href="/Jboard1/list.jsp" class="btnList">목록</a>
             </div>  
             
@@ -74,10 +76,13 @@
 	                        <span><%= comment.getRdate().substring(2, 10) %></span>
 	                    </span>
 	                    <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+	                    <% if( mb.getUid().equals(comment.getUid()) ){ %> <!-- 본인이 쓴 글이 맞으면( mb의 아이디와 comment의 아이디가 일치하면 ) -->
 	                    <div>
-	                        <a href="#">삭제</a>
+	                        <a href="/Jboard1/proc/deleteComment.jsp?parent=<%=comment.getParent() %>&seq=<%=comment.getSeq() %>">삭제</a>
 	                        <a href="#">수정</a>
 	                    </div>
+	                    <%} %>
+	                    
 	                </article>
                 <% } %>
                 
