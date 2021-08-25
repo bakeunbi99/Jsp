@@ -7,19 +7,15 @@
             <li><img src="./img/main_slide_img2.jpg" alt="슬라이더2"></li>
             <li><img src="./img/main_slide_img3.jpg" alt="슬라이더3"></li>
         </ul>  
-        
         <img src="./img/main_slide_img_tit.png" alt="사람과 자연을 사랑하는 팜스토리"/>
-
         <div class="banner">
             <img src="./img/main_banner_txt.png" alt="GRAND OPEN"/>
             <img src="./img/main_banner_tit.png" alt="팜스토리 오픈기념 30% 할인 이벤트"/>
             <img src="./img/main_banner_img.png" alt="과일"/>
         </div>
-
         <div class="float_banner">
             <img src="./img/float_banner_tit.png" alt="팜카트 신청시 10% 적립혜택"/>
         </div>
-
     </div>
     <div class="banner">
         <a href="#"><img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단"/></a>

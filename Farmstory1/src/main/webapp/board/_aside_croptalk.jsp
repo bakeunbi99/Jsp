@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../_header.jsp" %>
 <div id="sub" class="cate3">
     <div><img src="../img/sub_top_tit3.png" alt="CROP TALK"/></div>
     <section>
@@ -18,12 +17,4 @@
                     HOME > 농작물이야기 > <strong>농작물이야기</strong>
                 </p>
             </nav>
-
             <!-- 내용 시작 -->
-            <%@ include file="../board/list.jsp" %>
-
-            <!-- 내용 끝 -->
-        </article>
-    </section>
-</div>
-<%@ include file="../_footer.jsp" %>
