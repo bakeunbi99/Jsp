@@ -8,16 +8,19 @@
 	int end = uri.lastIndexOf(".");
 	
 	String cate = uri.substring(start, end);
+
 	
 %>
 
 <section id="board" class="write">
     <h3>글쓰기</h3>
     <article>
+
         <form action="/Farmstory1/board/proc/writeProc.jsp" method="post">
         
         	<input type="hidden" name="cate" value="<%= cate %>" />
-        	<input type="text" name="uid" value="<%= uid %>" />
+        	<input type="hidden" name="uid" value="<%= uid %>" />
+        	<input type="hidden" name="uri" value="<%= uri %>" />
         	
             <table>
                 <tr>
@@ -42,3 +45,5 @@
         </form>
     </article>
 </section>
+
+

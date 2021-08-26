@@ -10,7 +10,7 @@
 	String title 	= request.getParameter("title");
 	String content	= request.getParameter("content");
 	String uid	= request.getParameter("uid");
-	
+	String uri	= request.getParameter("uri");
 	String regip 	= request.getRemoteAddr();
 	
 	ArticleBean article = new ArticleBean();
@@ -24,6 +24,7 @@
 	ArticleDao.getInstance().insertArticle(article);
 	
 	
-	response.sendRedirect("/Farmstory1/croptalk/grow.jsp");
+	response.sendRedirect(uri);
+	
 	
 %>

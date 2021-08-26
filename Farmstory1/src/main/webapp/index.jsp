@@ -1,5 +1,22 @@
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="./_header.jsp" %>
+<%
+	// 최신글 가져오기
+	ArticleDao dao = ArticleDao.getInstance();
+	
+	List<ArticleBean> latestGrow =  dao.selectLatest("grow");
+	List<ArticleBean> latestSchool =  dao.selectLatest("school");
+	List<ArticleBean> latestStory =  dao.selectLatest("story");
+	
+	
+
+
+%>
+
 
 <main>
     <div class="slider">
@@ -19,104 +36,57 @@
         </div>
     </div>
     <div class="banner">
-        <a href="#"><img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단"/></a>
+        <a href="/Farmstory1/croptalk/grow.jsp"><img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단"/></a>
         <a href="#"><img src="./img/main_banner_sub2_tit.png" alt="나도 요리사"/></a>
     </div>
     <div class="latest">
+    
         <article>
             <a href="#"><img src="./img/main_latest1_tit.png" alt="텃밭가꾸기"/></a>
             <img src="./img/main_latest1_img.jpg" alt="이미지"/>
+            
             <table border="0">
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
+            	<% for(ArticleBean article : latestGrow){ %>
+	                <tr>
+	                    <td>></td>
+	                    <td><a href="/Farmstory1/croptalk/grow.jsp?mode=v"><%=article.getTitle() %></a></td>
+	                    <td><a>21-08-23</a></td>
+	                </tr>
+                <%} %>
+                
             </table>
         </article>
         <article>
-            <a href="#"><img src="./img/main_latest2_tit.png" alt="텃밭가꾸기"/></a>
+            <a href="/Farmstory1/croptalk/school.jsp"><img src="./img/main_latest2_tit.png" alt="귀농학교"/></a>
             <img src="./img/main_latest2_img.jpg" alt="이미지"/>
             <table border="0">
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
+                <% for(ArticleBean article : latestSchool){ %>
+	                <tr>
+	                    <td>></td>
+	                    <td><a href="/Farmstory1/croptalk/school.jsp?mode=v"><%=article.getTitle() %></a></td>
+	                    <td></a>21-08-23</a></td>
+	                </tr>
+                <%} %>
             </table>
         </article>
+        
         <article>
-            <a href="#"><img src="./img/main_latest3_tit.png" alt="텃밭가꾸기"/></a>
+            <a href="/Farmstory1/croptalk/school.jsp"><img src="./img/main_latest3_tit.png" alt="귀농학교"/></a>
             <img src="./img/main_latest3_img.jpg" alt="이미지"/>
             <table border="0">
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자</td>
-                    <td>21-08-23</td>
-                </tr>
+                <% for(ArticleBean article : latestStory){ %>
+	                <tr>
+	                    <td>></td>
+	                    <td><a href="/Farmstory1/croptalk/story.jsp?mode=v"><%=article.getTitle() %></a></td>
+	                    <td></a>21-08-23</a></td>
+	                </tr>
+                <%} %>
             </table>
         </article>
+        
     </div>
+    
+    
     <div class="info">
         <div>
             <img src="./img/main_sub2_cs_tit.png" class="tit" alt="고객센터 안내"/>
@@ -132,11 +102,12 @@
             </div>
 
             <div class="btns">
-                <a href="#"><img src="./img/main_sub2_cs_bt1.png" alt="고객문의"></a>
-                <a href="#"><img src="./img/main_sub2_cs_bt2.png" alt="자주묻는질문"></a>
+                <a href="/Farmstory1/community/qna.jsp"><img src="./img/main_sub2_cs_bt1.png" alt="고객문의"></a>
+                <a href="/Farmstory1/community/faq.jsp"><img src="./img/main_sub2_cs_bt2.png" alt="자주묻는질문"></a>
                 <a href="#"><img src="./img/main_sub2_cs_bt3.png" alt="배송조회"></a>
             </div>
         </div>
+        
         <div>
             <img src="./img/main_sub2_account_tit.png" class="tit" alt="계좌안내"/>
             <p class="account">

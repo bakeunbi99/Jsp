@@ -30,6 +30,10 @@ public class MemberDao {
 		return 0;
 	}	
 	
+	
+	/*
+	 * 로그인
+	 */
 	public MemberBean selectMember(String uid, String pass) {
 		
 		MemberBean mb = null;
@@ -63,6 +67,7 @@ public class MemberDao {
 		
 		return mb;
 	}
+	
 	
 	public void selectMembers() {}
 	public void updateMember() {}

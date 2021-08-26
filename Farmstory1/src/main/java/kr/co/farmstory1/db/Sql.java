@@ -2,7 +2,7 @@ package kr.co.farmstory1.db;
 
 public class Sql {
 
-	// »ç¿ëÀÚ °ü·Ã
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static final String SELECT_TERMS = "SELECT * FROM `Jboard_terms`;";
 	public static final String SELECT_MEMBER = "SELECT * FROM `Jboard_member` WHERE `uid`=? AND `pass`=PASSWORD(?);";  
 	public static final String INSERT_MEMBER = "INSERT INTO `Jboard_member` SET "
@@ -24,8 +24,14 @@ public class Sql {
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(`email`) FROM `Jboard_member` WHERE `email`=?;";
 	
 	
-	// °Ô½ÃÆÇ °ü·Ã
+	// ê²Œì‹œíŒ ê´€ë ¨
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`seq`) FROM `Jboard_article` WHERE `parent`=0;";
+	
+	public static final String SELECT_LATEST = "SELECT `seq`, `title`, `rdate` FROM `Jboard_article` "
+											+ "where cate = ? AND `parent` = 0 "
+											+ "order by rdate DESC "
+											+ "limit 5";
+	
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Jboard_article` AS a "
 											  + "LEFT JOIN `Jboard_file` AS b "
 											  + "ON a.seq = b.parent "

@@ -42,7 +42,6 @@
             <% }else if(mode.equals("m")){ %>
             	<jsp:include page="../board/modify.jsp"/>
             <% } %>
-
             <!-- 내용 끝 -->
         </article>
     </section>
