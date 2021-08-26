@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+ 
         <footer>
             <img src="/Farmstory1/img/footer_logo.png" alt="푸터로고"/>
             <p>
