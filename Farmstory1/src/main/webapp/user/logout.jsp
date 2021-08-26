@@ -2,6 +2,6 @@
 
 <%
 	session.invalidate();
+
 	response.sendRedirect("/Farmstory1/user/login.jsp");
-	
 %>

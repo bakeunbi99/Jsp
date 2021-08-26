@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+
+<%
+	String mode = request.getParameter("mode");
+	
+	if(mode == null){
+		mode = "l";
+	}
+%>
+
 <div id="sub" class="cate3">
     <div><img src="../img/sub_top_tit3.png" alt="CROP TALK"/></div>
     <section>
@@ -20,9 +29,15 @@
             </nav>
 
             <!-- 내용 시작 -->
-            <div>
-                <p>내용이 시작됩니다.</p>
-            </div>
+            <% if(mode.equals("l")){ %>
+            	<jsp:include page="../board/list.jsp"/>
+            <% }else if(mode.equals("w")){ %>
+            	<jsp:include page="../board/write.jsp"/>
+            <% }else if(mode.equals("v")){ %>
+            	<jsp:include page="../board/view.jsp"/>
+            <% }else if(mode.equals("m")){ %>
+            	<jsp:include page="../board/modify.jsp"/>
+            <% } %>
 
             <!-- 내용 끝 -->
         </article>

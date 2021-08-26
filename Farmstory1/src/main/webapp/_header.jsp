@@ -3,10 +3,7 @@
 
 <%
 	MemberBean mb =  (MemberBean)session.getAttribute("sessMember");
-	
 %>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +24,7 @@
 	                <a href="/Farmstory1/user/terms.jsp">회원가입 |</a>
                 <%}else { %>
                 	<a href="/Farmstory1/user/logout.jsp">로그아웃 |</a>
+                	<a href="/Farmstory1/user/mypage.jsp">마이페이지 |</a>
                 <%} %>
                 
                 <a href="/Farmstory1/community/qna.jsp">고객센터</a>

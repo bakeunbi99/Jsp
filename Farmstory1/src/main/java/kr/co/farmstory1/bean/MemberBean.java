@@ -2,18 +2,18 @@ package kr.co.farmstory1.bean;
 
 public class MemberBean {
 
-	private String uid;		//아이디
-	private String pass;	//비밀번호
-	private String name;	//이름
-	private String nick;	//닉네임
-	private String email;	//이메일
-	private String hp;		//전화번호
-	private int    grade;	//등급
-	private String zip;		//우편번호
-	private String addr1;	//주소1
-	private String addr2;	//주소2
-	private String regip;	//등록ip
-	private String rdate;	//등록일
+	private String uid;
+	private String pass;
+	private String name;
+	private String nick;
+	private String email;
+	private String hp;
+	private int    grade;
+	private String zip;
+	private String addr1;
+	private String addr2;
+	private String regip;
+	private String rdate;
 	
 	public String getUid() {
 		return uid;
