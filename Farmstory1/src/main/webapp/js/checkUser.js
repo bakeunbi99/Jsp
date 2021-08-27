@@ -2,7 +2,6 @@
  * 회원가입 사용자 중복체크
  */
 
-
 // 정규표현식(Regular Expression)
 var reUid  = /^[a-z]+[a-z0-9]{3,10}$/;
 var rePass = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,}$/;
@@ -24,7 +23,7 @@ $(document).ready(function(){
 		var uid = $(this).val();
 		
 		$.ajax({
-			url: '/Jboard1/user/proc/checkUid.jsp?uid='+uid,
+			url: '/Farmstory1/user/proc/checkUid.jsp?uid='+uid,
 			type: 'get',
 			dataType: 'json',
 			success: function(data){
@@ -88,7 +87,7 @@ $(document).ready(function(){
 		var nick = $(this).val();
 		
 		$.ajax({
-			url: '/Jboard1/user/proc/checkNick.jsp?nick='+nick,
+			url: '/Farmstory1/user/proc/checkNick.jsp?nick='+nick,
 			type: 'get',
 			dataType: 'json',
 			success: function(data){
@@ -115,7 +114,7 @@ $(document).ready(function(){
 		var email = $(this).val();
 		
 		$.ajax({
-			url: '/Jboard1/user/proc/checkEmail.jsp?email='+email,
+			url: '/Farmstory1/user/proc/checkEmail.jsp?email='+email,
 			type: 'get',
 			dataType: 'json',
 			success: function(data){
@@ -135,7 +134,7 @@ $(document).ready(function(){
 		var hp = $(this).val();
 		
 		$.ajax({
-			url: '/Jboard1/user/proc/checkHp.jsp?hp='+hp,
+			url: '/Farmstory1/user/proc/checkHp.jsp?hp='+hp,
 			type: 'get',
 			dataType: 'json',
 			success: function(data){

@@ -15,7 +15,7 @@ public class DBConfig {
 	}
 	
 	// DB����
-	private final String HOST = "jdbc:mysql://54.180.160.240:3306/p57575777";
+	private final String HOST = "jdbc:mysql://3.38.95.56:3306/p57575777";
 	private final String USER = "p57575777";
 	private final String PASS = "1234";
 	

@@ -1,3 +1,4 @@
+<%@page import="kr.co.farmstory1.dao.MemberDao"%>
 <%@page import="kr.co.farmstory1.db.Sql"%>
 <%@page import="kr.co.farmstory1.db.DBConfig"%>
 <%@page import="com.google.gson.JsonObject"%>
@@ -11,30 +12,8 @@
 	request.setCharacterEncoding("UTF-8");
 	String uid = request.getParameter("uid");
 	
-	//Json출력
-	int result = 0;
-	
-	try{
-		// 1,2단계
-		Connection conn= DBConfig.getInstance().getConnection();
-		// 3단계
-		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
-		psmt.setString(1, uid);
-		
-		// 4단계
-		ResultSet rs = psmt.executeQuery();
-		// 5단계		
-		if(rs.next()){
-			result = rs.getInt(1);
-		}
-		// 6단계
-		rs.close();
-		psmt.close();
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	// 1:uid 체크, 2:nick 체크, 3:email 체크, 4:hp 체크 
+	int result = MemberDao.getInstance().selectCountUserInfo(1, uid);
 
 	// Json 출력
 	JsonObject json = new JsonObject();

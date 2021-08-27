@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-
 <section id="user" class="login">
     <form action="/Farmstory1/user/proc/loginProc.jsp" method="post">
         <table border="0">
@@ -24,5 +23,4 @@
         <a href="./terms.jsp">회원가입</a>
     </div>
 </section>
-
 <%@ include file="../_footer.jsp" %>

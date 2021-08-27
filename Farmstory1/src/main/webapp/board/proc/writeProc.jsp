@@ -1,17 +1,14 @@
 <%@page import="kr.co.farmstory1.bean.ArticleBean"%>
 <%@page import="kr.co.farmstory1.dao.ArticleDao"%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 	request.setCharacterEncoding("utf-8");
-
-	String cate	= request.getParameter("cate");
-	String title 	= request.getParameter("title");
-	String content	= request.getParameter("content");
-	String uid	= request.getParameter("uid");
-	String uri	= request.getParameter("uri");
-	String regip 	= request.getRemoteAddr();
+	String cate    = request.getParameter("cate");
+	String title   = request.getParameter("title");
+	String content = request.getParameter("content");
+	String uid     = request.getParameter("uid");
+	String uri     = request.getParameter("uri");
+	String regip   = request.getRemoteAddr();
 	
 	ArticleBean article = new ArticleBean();
 	article.setCate(cate);
@@ -23,8 +20,7 @@
 	
 	ArticleDao.getInstance().insertArticle(article);
 	
-	
 	response.sendRedirect(uri);
-	
-	
 %>
+
+

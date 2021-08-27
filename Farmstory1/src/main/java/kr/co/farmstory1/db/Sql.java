@@ -2,7 +2,7 @@ package kr.co.farmstory1.db;
 
 public class Sql {
 
-	// ÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩ
+	// ªÁøÎ¿⁄ ∞¸∑√
 	public static final String SELECT_TERMS = "SELECT * FROM `Jboard_terms`;";
 	public static final String SELECT_MEMBER = "SELECT * FROM `Jboard_member` WHERE `uid`=? AND `pass`=PASSWORD(?);";  
 	public static final String INSERT_MEMBER = "INSERT INTO `Jboard_member` SET "
@@ -24,13 +24,12 @@ public class Sql {
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(`email`) FROM `Jboard_member` WHERE `email`=?;";
 	
 	
-	// Í≤åÏãúÌåê Í¥ÄÎ†®
-	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`seq`) FROM `Jboard_article` WHERE `parent`=0;";
+	// ∞‘Ω√∆« ∞¸∑√
+	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`seq`) FROM `Jboard_article` WHERE `parent`=0 AND `cate`=?";
 	
 	public static final String SELECT_LATEST = "SELECT `seq`, `title`, `rdate` FROM `Jboard_article` "
-											+ "where cate = ? AND `parent` = 0 "
-											+ "order by rdate DESC "
-											+ "limit 5";
+											 + "WHERE `cate`=? AND `parent`=0 "
+											 + "ORDER BY `seq` DESC LIMIT 5";
 	
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Jboard_article` AS a "
 											  + "LEFT JOIN `Jboard_file` AS b "
@@ -40,7 +39,7 @@ public class Sql {
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.nick FROM `Jboard_article` AS a "
 												+ "JOIN `Jboard_member` AS b "
 												+ "ON a.uid = b.uid "
-												+ "WHERE `parent`=0 "
+												+ "WHERE `parent`=0 AND `cate`=? "
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?, 10;";
 	

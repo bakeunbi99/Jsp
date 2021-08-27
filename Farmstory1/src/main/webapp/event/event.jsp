@@ -1,14 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-<%
-	String mode = request.getParameter("mode");
-	String uri = request.getRequestURI();
-	
-	System.out.println("uri : "+uri);
-	if(mode == null){
-		mode = "l";
-	}
-%>
 <div id="sub" class="cate4">
     <div><img src="../img/sub_top_tit4.png" alt="EVENT"/></div>
     <section>
@@ -31,7 +22,7 @@
             	<jsp:include page="../board/list.jsp"/>
             <% }else if(mode.equals("w")){ %>
             	<jsp:include page="../board/write.jsp">
-            		<jsp:param name="uid" value="<%= mb.getUid() %>" />
+            		<jsp:param name="uid" value="<%= mb.getUid() %>"/>
             	</jsp:include>
             <% }else if(mode.equals("v")){ %>
             	<jsp:include page="../board/view.jsp"/>

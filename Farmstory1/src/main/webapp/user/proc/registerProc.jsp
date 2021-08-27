@@ -1,10 +1,11 @@
+<%@page import="kr.co.farmstory1.bean.MemberBean"%>
+<%@page import="kr.co.farmstory1.dao.MemberDao"%>
 <%@page import="kr.co.farmstory1.db.Sql"%>
 <%@page import="kr.co.farmstory1.db.DBConfig"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%	
 	// 전송 데이터 수신
 	request.setCharacterEncoding("UTF-8");
@@ -19,37 +20,20 @@
 	String addr2 = request.getParameter("addr2");
 	String regip = request.getRemoteAddr();
 
-	try{
-		// 1,2단계
-		Connection conn= DBConfig.getInstance().getConnection();
-		// 3단계
-		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_MEMBER);
-		psmt.setString(1, uid);
-		psmt.setString(2, pass1);
-		psmt.setString(3, name);
-		psmt.setString(4, nick);
-		psmt.setString(5, email);
-		psmt.setString(6, hp);
-		psmt.setString(7, zip);
-		psmt.setString(8, addr1);
-		psmt.setString(9, addr2);
-		psmt.setString(10, regip);
-		
-		// 4단계
-		psmt.executeUpdate();		
-		// 5단계
-		
-		// 6단계
-		psmt.close();
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
-
-	out.print("입력완료");
+	MemberBean mb = new MemberBean();
+	mb.setUid(uid);
+	mb.setPass(pass1);
+	mb.setName(name);
+	mb.setNick(nick);
+	mb.setEmail(email);
+	mb.setHp(hp);
+	mb.setZip(zip);
+	mb.setAddr1(addr1);
+	mb.setAddr2(addr2);
+	mb.setRegip(regip);
 	
+	MemberDao.getInstance().insertMember(mb);
+
 	// 리다이렉트
 	response.sendRedirect("/Farmstory1/user/login.jsp");
-	
 %>
