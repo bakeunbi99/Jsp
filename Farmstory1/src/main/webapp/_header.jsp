@@ -25,6 +25,7 @@
     <meta charset="UTF-8">
     <title>팜스토리</title>
     <link rel="stylesheet" href="/Farmstory1/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
     	var success = "<%= success %>";
     	

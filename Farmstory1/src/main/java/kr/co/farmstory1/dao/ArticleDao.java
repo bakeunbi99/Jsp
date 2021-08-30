@@ -3,6 +3,7 @@ package kr.co.farmstory1.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,6 @@ public class ArticleDao {
 		
 		return latests;
 	}
-	
 	
 	public ArticleBean selectArticle(String seq) {
 		
@@ -211,7 +211,24 @@ public class ArticleDao {
 		return comments;
 	}
 	
-	public void insertArticle(ArticleBean article) {
+	public int selectMaxSeq() {
+		int seq = 0;
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_SEQ);
+			if(rs.next()){
+				seq = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return seq;
+	}
+	
+	public int insertArticle(ArticleBean article) {
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
@@ -227,6 +244,24 @@ public class ArticleDao {
 			conn.close();			
 		}catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		// 글 등록 후 바로 해당 글번호 리턴 
+		return selectMaxSeq();
+	}
+	
+	public void insertFile(int seq, String oriName, String newName) {
+		try{
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, seq);
+			psmt.setString(2, oriName);
+			psmt.setString(3, newName);
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();	
 		}
 	}
 	

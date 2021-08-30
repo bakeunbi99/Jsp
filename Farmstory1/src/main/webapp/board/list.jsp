@@ -18,7 +18,7 @@
 		pg = "1";
 	}
 	
-	// 페이지 처리
+	// 페이지 계산 처리 
 	int start = 0;
 	int currentPage = Integer.parseInt(pg);
 	int total = ArticleDao.getInstance().selectCountTotal(cate);
@@ -57,7 +57,7 @@
             <% for(ArticleBean article : articles){ %>
             <tr>
                 <td><%= pageStartNum-- %></td>
-                <td><a href="/Jboard1/view.jsp?seq=<%= article.getSeq() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+                <td><a href="<%= uri %>?mode=v&seq=<%= article.getSeq() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
                 <td><%= article.getNick() %></td>
                 <td><%= article.getRdate().substring(2, 10) %></td>
                 <td><%= article.getHit() %></td>
@@ -70,15 +70,15 @@
     <div class="paging">
         
         <% if(groupStart > 1){ %>
-        	<a href="/Jboard1/list.jsp?pg=<%= groupStart - 1 %>" class="prev">이전</a>
+        	<a href="<%= uri %>?pg=<%= groupStart - 1 %>" class="prev">이전</a>
         <% } %>
         
         <% for(int i=groupStart ; i<=groupEnd ; i++){ %>
-        	<a href="/Jboard1/list.jsp?pg=<%= i %>" class="num <%= (currentPage == i) ? "current":"" %>"><%= i %></a>
+        	<a href="<%= uri %>?pg=<%= i %>" class="num <%= (currentPage == i) ? "current":"" %>"><%= i %></a>
         <% } %>
         
         <% if(groupEnd < lastPageNum){ %>
-        	<a href="/Jboard1/list.jsp?pg=<%= groupEnd + 1 %>" class="next">다음</a>
+        	<a href="<%= uri %>?pg=<%= groupEnd + 1 %>" class="next">다음</a>
         <% } %>
     </div>
     
