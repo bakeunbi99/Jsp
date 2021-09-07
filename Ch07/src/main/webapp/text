@@ -1,0 +1,19 @@
+1. 프로퍼티 파일 생성
+2. 프로퍼티 객체 생성
+프로퍼티 파일로 프로퍼티 객체 생성
+프로퍼티 객체(서비스 객체를 갖는 구조체 hashmap) -> 해당 패키지의 해당 클래스
+프로퍼티 객체는 (key, value) 형태이다.
+ex) key, value는 문자값
+key : hello.do
+value : model.helloService
+
+
+정리)
+최초 요청 -> init생성
+클라이언트에서 컨트롤러 실행시 model 실행 (CommonService, HelloService, ..)
+
+
+
+
+
+
