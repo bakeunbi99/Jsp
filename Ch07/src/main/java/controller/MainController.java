@@ -80,6 +80,7 @@ public class MainController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//req.setCharacterEncoding("utf-8"); -> 필터 적용
 		requestProc(req, resp);
 	}
 	
@@ -97,12 +98,21 @@ public class MainController extends HttpServlet {
 		//Object 타입으로 instance를 구현하기 위해  
 		//HelloService service = (HelloService) instance; //하나하나 선택 할 수 없으니
 				
-		// Service 객체 실행 후 View 정보 받기
-		String view = instance.requestProc(req, resp);
+		// Service 객체 실행 후 결과(View, 리다이렉트) 정보 받기
+		String result = instance.requestProc(req, resp);
 		
-		// 해당 View로 forward 하기
-		RequestDispatcher dispatcher = req.getRequestDispatcher(view);
-		dispatcher.forward(req, resp);
+		
+		//컨트롤러 기능 확장 -> 리다이렉트 기능 추가
+		if(result.startsWith("redirect:") ) { // 만약 
+			// 리다이렉트
+			String redirecUrl = result.substring(9);
+			resp.sendRedirect(path+redirecUrl);
+		}else {
+			// 해당 View로 forward 하기
+			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
+			dispatcher.forward(req, resp);
+
+		}
 		
 		
 	}
