@@ -2,6 +2,7 @@ package kr.co.jboard2.controller;
 // 컨트롤러 서블릿 서비스 등록 -> web.xml
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -106,11 +107,15 @@ public class MainController extends HttpServlet {
 			// 리다이렉트
 			String redirecUrl = result.substring(9);
 			resp.sendRedirect(path+redirecUrl);
-		}else {
+		}else if(result.startsWith("json:")){ //"{'key':'value'}" 문자열에서 => {'key':'value'} Json 객체로 변환
+			// Json 출력
+			PrintWriter out = resp.getWriter();
+			out.print(result.substring(5)); // 5부터 자르겠다.
+			
+		}else{
 			// 해당 View로 forward 하기
 			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
 			dispatcher.forward(req, resp);
-
 		}
 		
 		

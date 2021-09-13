@@ -101,6 +101,32 @@ public class MemberDao {
 	public void selectMembers() {};
 	
 	/*==========================
+	유저들 중복 체크확인 (select)
+	==========================*/
+	public int selectCountUid(String uid) {
+		
+		int count = 0;
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt =  conn.prepareStatement(Sql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			
+			ResultSet rs = psmt.executeQuery();			
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+		
+	};
+	
+	/*==========================
 	회원 업데이트 (update)
 	==========================*/
 	public void updateMember() {};

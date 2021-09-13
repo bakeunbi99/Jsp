@@ -6,6 +6,34 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="../css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    	$(function(){
+    		// 아이디 중복체크
+			$('input[name=uid]').focusout(function(){
+				
+				var uid = $(this).val(); //내가 선택한 필드의 값
+				
+				$.ajax({
+					url:'/Jboard2/user/checkUid.do?uid='+uid,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						
+						alert(data.result);
+						
+					}
+				});
+			});
+    		// 비밀번호 유효성 검사
+    		// 이름 유효성 검사
+    		// 닉네임 중복체크
+    		// 이메일 중복체크
+    		// 휴대폰 중복체크
+    		
+    	});
+    </script>
+    
 </head>
 <body>
     <div id="wrapper">
