@@ -28,8 +28,54 @@
     		// 비밀번호 유효성 검사
     		// 이름 유효성 검사
     		// 닉네임 중복체크
+    		$('input[name=nick]').focusout(function(){
+				
+				var nick = $(this).val(); //내가 선택한 필드의 값
+				
+				$.ajax({
+					url:'/Jboard2/user/checkNick.do?nick='+nick,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						
+						alert(data.result);
+						
+					}
+				});
+			});
     		// 이메일 중복체크
+    		$('input[name=email]').focusout(function(){
+				
+				var email = $(this).val(); //내가 선택한 필드의 값
+				
+				$.ajax({
+					url:'/Jboard2/user/checkEmail.do?email='+email,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						
+						alert(data.result);
+						
+					}
+				});
+			});
     		// 휴대폰 중복체크
+			$('input[name=hp]').focusout(function(){
+				
+				var hp = $(this).val(); //내가 선택한 필드의 값
+				
+				$.ajax({
+					url:'/Jboard2/user/checkHp.do?hp='+hp,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						
+						alert(data.result);
+						
+					}
+				});
+			});
+    		
     		
     	});
     </script>

@@ -1,5 +1,5 @@
 package kr.co.jboard2.db;
-
+//model2 Sql
 public class Sql {
 
 	// ����� ����
