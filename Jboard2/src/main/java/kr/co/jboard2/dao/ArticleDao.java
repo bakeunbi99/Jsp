@@ -68,6 +68,36 @@ public class ArticleDao {
 		}
 	}
 	
+	/* ========================
+		글 목록 총 개수
+	======================== */	
+	public int selectCountTotal() {
+		
+		int total = 0;
+		
+		try{
+			Connection conn = DBConfig.getInstance().getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
+
+
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return total;
+		
+	}
+
+
 	/*========================
 		최신 글 번호 가져오기.
 	========================*/	
@@ -143,31 +173,7 @@ public class ArticleDao {
 		
 	}
 	
-	public int selectCountTotal() {
-		
-		int total = 0;
-		
-		try{
-			// 1,2�ܰ�
-			Connection conn = DBConfig.getInstance().getConnection();
-			// 3�ܰ�
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
-			// 4�ܰ�
-			ResultSet rs = psmt.executeQuery();
-			// 5�ܰ�
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			// 6�ܰ�
-			rs.close();
-			psmt.close();
-			conn.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return total;
-		
-	}
+	
 
 	/*========================
 	

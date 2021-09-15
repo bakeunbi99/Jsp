@@ -27,7 +27,7 @@
                     </tr>
                     <c:forEach var="vo" items="${articles}" >
 	                    <tr>
-	                        <td>${vo.seq}</td>
+	                        <td>${pageStartNum = pageStartNum -1}</td>
 	                        <td><a href="/Jboard2/view.do">${vo.title }</a>&nbsp;[${vo.comment}]</td>
 	                        <td>${vo.nick}</td>
 	                        <td>${vo.rdate}</td>
@@ -41,10 +41,12 @@
             <!-- 페이지 네비게이션 -->
             <div class="paging">
             <!-- <a href="/Jboard2/list.do?pg=${vo.groupStart}" -->
-                <a href="/Jboard2/list.do" class="prev">이전</a>
-                <a href="#" class="num current">1</a>                
-                <a href="#" class="num">2</a>                
-                <a href="#" class="num">3</a>                
+                <a href="#" class="prev">이전</a>
+                
+                <c:forEach var="i" begin="1" end="${lastPageNum}">
+                	<a href="/Jboard2/list.do?pg=${i}"class="num ${currentPage == i ? 'current':'off'}">${i}</a>
+                </c:forEach>
+                                
                 <a href="#" class="next">다음</a>
             </div>
 

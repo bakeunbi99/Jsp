@@ -24,47 +24,64 @@ public class ListService implements CommonService{
 			return "redirect:/user/login.do?success=102";
 		}else {
 			
-			List<ArticleVo> articles = ArticleDao.getInstance().selectArticles(0);
-			req.setAttribute("articles", articles);
-			
-			//ArticleVo vo = new ArticleVo();
-			
 			String pg = req.getParameter("pg");
 			
-			if(pg == null){
-				pg = "1";
-			}
-			
 			// 페이지 처리
-			int start = 0;
-			int currentPage = Integer.parseInt(pg);
+			int currentPage = getCurrentPageNum(pg);
 			int total = ArticleDao.getInstance().selectCountTotal();
-			int lastPageNum = 0;
+			int lastPageNum = getLastPageNum(total);
+			int start = getLimitStart(currentPage);
+			int pageStartNum = getPageStartNum(total, start);
+
 			
-			if(total % 10 == 0){
-				lastPageNum = total / 10;
-			}else{
-				lastPageNum = total / 10 + 1;
-			}	
-			start = (currentPage - 1) * 10;
+			List<ArticleVo> articles = ArticleDao.getInstance().selectArticles(0);
 			
-			int pageStartNum = total - start;
-			int groupCurrent = (int)Math.ceil(currentPage / 10.0);
-			int groupStart = (groupCurrent - 1) * 10 + 1;
-			int groupEnd = groupCurrent * 10;
-			
-			if(groupEnd > lastPageNum){
-				groupEnd = lastPageNum;
-			}
-			
-			
-			
+			req.setAttribute("articles", articles);
+			req.setAttribute("lastPageNum", lastPageNum);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("pageStartNum", pageStartNum);
 			
 			
 			return "/list.jsp";
 			
+		}//if-else
+	}//requestProc end
+	
+	
+	//시작 페이지
+	public int getCurrentPageNum(String pg) {
+		
+		if(pg == null){
+			pg = "1";
 		}
 		
+		return Integer.parseInt(pg);
 		
 	}
+	//마지막페이지
+	public int getLastPageNum(int total) {
+		
+		int lastPageNum = 0;
+		
+		if(total % 10 == 0){
+			lastPageNum = total / 10;
+		}else{
+			lastPageNum = total / 10 + 1;
+		}
+		
+		return lastPageNum;
+	}
+	
+	public int getLimitStart(int currentPage) {
+		return (currentPage - 1) * 10;
+	}
+	
+	public int getPageStartNum(int total, int start) {
+		return (total-start)+1;
+	}
+	
+	
+	
+	
+	
 }
