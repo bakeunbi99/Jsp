@@ -32,7 +32,7 @@ public class ListService implements CommonService{
 			int lastPageNum = getLastPageNum(total);
 			int start = getLimitStart(currentPage);
 			int pageStartNum = getPageStartNum(total, start);
-
+			int[] groups = getPageGroup(currentPage, lastPageNum);
 			
 			List<ArticleVo> articles = ArticleDao.getInstance().selectArticles(0);
 			
@@ -40,9 +40,11 @@ public class ListService implements CommonService{
 			req.setAttribute("lastPageNum", lastPageNum);
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("pageStartNum", pageStartNum);
+			req.setAttribute("groups", groups);
 			
 			
 			return "/list.jsp";
+			
 			
 		}//if-else
 	}//requestProc end
@@ -80,8 +82,23 @@ public class ListService implements CommonService{
 		return (total-start)+1;
 	}
 	
+	public int[] getPageGroup(int currentPage, int lastPageNum) {
+		
+		int groupCurrent = (int)Math.ceil(currentPage / 10.0);
+		int groupStart = (groupCurrent - 1) * 10 + 1;
+		int groupEnd = groupCurrent * 10;
+		
+		if(groupEnd > lastPageNum){
+			groupEnd = lastPageNum;
+		}
+		
+		int[] groups = {groupStart, groupEnd};
+		
+		//2개 return => 배열
+		return groups;
+		
+	}
 	
 	
 	
-	
-}
+}// class end

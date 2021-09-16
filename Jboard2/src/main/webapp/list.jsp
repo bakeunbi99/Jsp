@@ -28,7 +28,7 @@
                     <c:forEach var="vo" items="${articles}" >
 	                    <tr>
 	                        <td>${pageStartNum = pageStartNum -1}</td>
-	                        <td><a href="/Jboard2/view.do">${vo.title }</a>&nbsp;[${vo.comment}]</td>
+	                        <td><a href="/Jboard2/view.do?seq=${vo.seq}">${vo.title}</a>&nbsp;[${vo.comment}]</td>
 	                        <td>${vo.nick}</td>
 	                        <td>${vo.rdate}</td>
 	                        <td>${vo.hit}</td>
@@ -40,14 +40,15 @@
 
             <!-- 페이지 네비게이션 -->
             <div class="paging">
-            <!-- <a href="/Jboard2/list.do?pg=${vo.groupStart}" -->
-                <a href="#" class="prev">이전</a>
-                
-                <c:forEach var="i" begin="1" end="${lastPageNum}">
+            	<c:if test="${groups[0] > 1 }">
+            		<a href="/Jboard2/list.do?pg=${groups[0] - 1}" class="prev">이전</a>
+            	</c:if>
+                <c:forEach var="i" begin="${groups[0]}" end="${groups[1]}">
                 	<a href="/Jboard2/list.do?pg=${i}"class="num ${currentPage == i ? 'current':'off'}">${i}</a>
                 </c:forEach>
-                                
-                <a href="#" class="next">다음</a>
+                <c:if test="${groups[1] < lastPageNum }">
+            		<a href="/Jboard2/list.do?pg=${groups[1] + 1}" class="next">다음</a>
+            	</c:if>
             </div>
 
             <!-- 글쓰기 버튼 -->
