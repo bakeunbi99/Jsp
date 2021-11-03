@@ -11,7 +11,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String nick = request.getParameter("nick");
 	
-	//Json출력
 	int result = 0;
 	
 	try{

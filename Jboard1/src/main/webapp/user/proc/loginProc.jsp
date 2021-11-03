@@ -8,11 +8,9 @@
 <%
 	// 전송 데이터 수신
 	request.setCharacterEncoding("utf-8");
-
 	String uid  = request.getParameter("uid");	
 	String pass = request.getParameter("pass");	
 
-	//참조 변수이기 때문에 null 값 을 선언
 	MemberBean mb = null;
 	
 	try{

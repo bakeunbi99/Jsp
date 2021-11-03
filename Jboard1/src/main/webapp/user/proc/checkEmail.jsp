@@ -7,13 +7,10 @@
 <%@page import="java.sql.DriverManager"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	
+	// 전송데이터 수신
 	request.setCharacterEncoding("UTF-8");
-
-	//전송데이터 수신
 	String email = request.getParameter("email");
 	
-	//Json 출력
 	int result = 0;
 	
 	try{

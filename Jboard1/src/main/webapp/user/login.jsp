@@ -3,8 +3,6 @@
 	request.setCharacterEncoding("utf-8");
 	String success = request.getParameter("success");
 %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

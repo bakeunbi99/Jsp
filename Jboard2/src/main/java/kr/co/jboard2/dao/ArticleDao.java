@@ -69,6 +69,33 @@ public class ArticleDao {
 		}
 	}
 	
+	/*========================
+		댓글 입력
+	========================*/
+	public void insertComment(ArticleVo vo) {
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
+			psmt.setInt(1, vo.getParent());
+			psmt.setString(2, vo.getContent());
+			psmt.setString(3, vo.getUid());
+			psmt.setString(4, vo.getRegip());
+			
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	} 
+	
+	
+	
 	/* ========================
 		글 목록 총 개수
 	======================== */	
@@ -117,6 +144,41 @@ public class ArticleDao {
 		}
 		
 		return seq;
+	}
+	
+	/*========================
+	 파일 여부
+	========================*/
+	
+	public FileVo selectFile(String fseq) {
+		
+		FileVo fvo = null;
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_FILE);
+			psmt.setString(1, fseq);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				fvo = new FileVo();
+				fvo.setFseq(rs.getInt(1));
+				fvo.setParent(rs.getInt(2));
+				fvo.setOriName(rs.getString(3));
+				fvo.setNewName(rs.getString(4));
+				fvo.setDownload(rs.getInt(5));
+				fvo.setRdate(rs.getString(6));
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return fvo;
 	}
 	
 	/*========================
@@ -222,6 +284,53 @@ public class ArticleDao {
 		
 	}
 	
+	/* ========================
+	해당 글 댓글 가져오기
+	======================== */
+	public List<ArticleVo> selectComments(String parent) {
+		
+		List<ArticleVo> comments = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
+			psmt.setString(1, parent);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ArticleVo vo = new ArticleVo();
+				
+				vo.setSeq(rs.getInt(1));
+				vo.setParent(rs.getInt(2));
+				vo.setComment(rs.getInt(3));
+				vo.setCate(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setContent(rs.getString(6));
+				vo.setFile(rs.getInt(7));
+				vo.setHit(rs.getInt(8));
+				vo.setUid(rs.getString(9));
+				vo.setRegip(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setNick(rs.getString(12));
+				
+				comments.add(vo);
+				
+			}
+			
+			rs.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return comments;
+		
+	}
+
 	
 
 	/*========================

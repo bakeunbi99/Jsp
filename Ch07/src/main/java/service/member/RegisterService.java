@@ -3,9 +3,11 @@ package service.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CustomerDao;
 import dao.MemberDao;
 import dao.UserDao;
 import model.CommonService;
+import vo.CustomerVo;
 import vo.MemberVo;
 import vo.UserVo;
 
@@ -17,27 +19,25 @@ public class RegisterService implements CommonService{
 		
 		if(req.getMethod().equals("GET")) {
 			
-			return "/member/register.jsp";
+			return "/customer/register.jsp";
 			
 		}else {
 			// Database Access(처리 로직)
-			String uid   = req.getParameter("uid");
+			String custid   = req.getParameter("custid");
 			String name  = req.getParameter("name");
-			String hp    = req.getParameter("hp");
-			String pos   = req.getParameter("pos");
-			String dep      = req.getParameter("dep");
+			String address    = req.getParameter("address");
+			String phone   = req.getParameter("phone");
 			
-			MemberVo vo = new MemberVo();
-			vo.setUid(uid);
+			CustomerVo vo = new CustomerVo();
+			vo.setCustid(custid);
 			vo.setName(name);
-			vo.setHp(hp);
-			vo.setPos(pos);
-			vo.setDep(dep);
+			vo.setAddress(address);
+			vo.setPhone(phone);
 			
 			// Dao 실행
-			MemberDao.getInstance().insertMember(vo);
+			CustomerDao.getInstance().insertCustomer(vo);
 			
-			return "redirect:/member/list.do";
+			return "redirect:/customer/list.do";
 			
 		}
 		

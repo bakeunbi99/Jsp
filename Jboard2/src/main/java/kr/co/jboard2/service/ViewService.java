@@ -1,5 +1,7 @@
 package kr.co.jboard2.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +16,18 @@ public class ViewService implements CommonService{
 
 
 		String seq = req.getParameter("seq");
-		ArticleVo vo = ArticleDao.getInstance().selectArticle(seq);
+		
+		ArticleDao dao = ArticleDao.getInstance();
+		ArticleVo vo = dao.selectArticle(seq);
+		
+		List<ArticleVo> comments = dao.selectComments(seq);
+		
 		req.setAttribute("vo", vo);
+		req.setAttribute("comments", comments);
 		
 		
 		return "/view.jsp";
-
+		
 	}
 	
 }

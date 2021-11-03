@@ -110,6 +110,8 @@
 	});
 
 </script>
+
+
 <section id="board" class="view">
     <h3>글보기</h3>
     <table>
@@ -121,7 +123,7 @@
         <tr>
             <td>첨부파일</td>
             <td>
-                <a href="#"><%= article.getFb().getOriName() %></a>
+                <a href="/Farmstory1/board/proc/downloadProc.jsp?fseq=<%= article.getFb().getFseq() %>"><%= article.getFb().getOriName() %></a>
                 <span><%= article.getFb().getDownload() %>회 다운로드</span>
             </td>
         </tr>
@@ -135,7 +137,7 @@
     </table>
     <div>
     	<% if(uid.equals(article.getUid())){ %>
-        	<a href="/Farmstory1/board/proc/deleteProc.jsp?seq=<%= article.getSeq() %>&uri=<%= uri %>" class="btnDelete">삭제</a>
+        	<a href="/Farmstory1/board/proc/deleteProc.jsp?seq=<%= article.getSeq() %>&uri=<%= uri %>" class="btnDelete"">삭제</a>
        		<a href="<%= uri %>?mode=m&seq=<%= article.getSeq() %>" class="btnModify">수정</a>
      	<% } %>
         <a href="<%= uri %>" class="btnList">목록</a>

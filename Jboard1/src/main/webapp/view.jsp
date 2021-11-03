@@ -31,6 +31,99 @@
     <meta charset="UTF-8">
     <title>글보기</title>
     <link rel="stylesheet" href="/Jboard1/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		
+    		// 댓글 삭제
+    		$('.btnCommentDel').click(function(){
+    			var result = confirm('정말 삭제 하시겠습니까?');
+    			return result;
+    		});
+    		
+    		
+    		var content = '';
+    		
+    		// 댓글 수정
+    		$('.btnCommentModify').click(function(){
+    			
+    			var tag = $(this);
+    			var mode = $(this).text();    			    			
+    			var textarea = $(this).parent().prev();
+    			
+    			if(mode == '수정'){
+    				// 수정모드
+    				content = textarea.val(); 
+    				
+    				$(this).prev().css('display', 'none');
+    				$(this).next().css('display', 'inline');
+    				$(this).text('수정완료');
+    				textarea.attr('readonly', false).focus();
+        			textarea.css({
+        				'background': 'white',
+        				'outline': '1px solid gray'
+        			});
+        			
+    			}else{
+    				// 수정완료 모드
+    				
+    				var seq     = textarea.attr('data-seq');
+    				var comment = textarea.val(); 
+    				
+    				var jsonData = {
+    						'seq': seq,
+    						'comment': comment
+    					};
+    				
+    				$.ajax({
+    					url: '/Jboard1/proc/updateComment.jsp',
+    					type: 'post',
+    					data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
+    					dataType: 'json', // 서버로 부터 전달되는 데이터 종류
+    					success: function(data){
+    						if(data.result == 1){
+    							alert('댓글 수정이 성공 했습니다.');
+    							
+    							// 수정모드 해제
+    							tag.text('수정');
+    							tag.prev().css('display', 'inline');
+    							tag.next().css('display', 'none');    			    			    							
+    			    			textarea.attr('readonly', true);
+    			    			textarea.css({
+    			    				'background': 'transparent',
+    			    				'outline': 'none'
+    			    			});
+    			    			
+    						}else{
+    							alert('댓글 수정이 실패 했습니다.');
+    						}
+    					}
+    				});
+    			}
+    			return false;
+    		});
+    		
+    		// 댓글 수정 취소
+    		$('.btnCommentCancel').click(function(e){
+    			e.preventDefault();
+    			$(this).prev().text('수정');
+    			$(this).prev().prev().css('display', 'inline');
+    			$(this).css('display', 'none');
+    			
+    			var textarea = $(this).parent().prev();
+    			
+    			textarea.val(content);
+    			textarea.attr('readonly', true);
+    			textarea.css({
+    				'background': 'transparent',
+    				'outline': 'none'
+    			});	
+    		});
+    		
+    		
+    	});
+    
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -45,7 +138,7 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                        <a href="#"><%= article.getFb().getOriName() %></a>
+                        <a href="/Jboard1/proc/download.jsp?fseq=<%= article.getFb().getFseq() %>"><%= article.getFb().getOriName() %></a>
                         <span><%= article.getFb().getDownload() %>회 다운로드</span>
                     </td>
                 </tr>
@@ -58,10 +151,10 @@
                 </tr>
             </table>
             <div>
-            <% if( mb.getUid().equals(article.getUid()) ) { %>
-                <a href="#" class="btnDelete">삭제</a>
-                <a href="/Jboard1/modify.jsp" class="btnModify">수정</a>
-             <%} %>
+	           	<% if(mb.getUid().equals(article.getUid())){ %>
+	                <a href="/Jboard1/proc/deleteProc.jsp?seq=<%= article.getSeq() %>" class="btnDelete">삭제</a>
+                	<a href="/Jboard1/modify.jsp?seq=<%= article.getSeq() %>" class="btnModify">수정</a>
+	            <% } %>
                 <a href="/Jboard1/list.jsp" class="btnList">목록</a>
             </div>  
             
@@ -75,14 +168,15 @@
 	                        <span><%= comment.getNick() %></span>
 	                        <span><%= comment.getRdate().substring(2, 10) %></span>
 	                    </span>
-	                    <textarea name="comment" readonly><%= comment.getContent() %></textarea>
-	                    <% if( mb.getUid().equals(comment.getUid()) ){ %> <!-- 본인이 쓴 글이 맞으면( mb의 아이디와 comment의 아이디가 일치하면 ) -->
-	                    <div>
-	                        <a href="/Jboard1/proc/deleteComment.jsp?parent=<%=comment.getParent() %>&seq=<%=comment.getSeq() %>">삭제</a>
-	                        <a href="#">수정</a>
-	                    </div>
-	                    <%} %>
+	                    <textarea name="comment" readonly data-seq="<%= comment.getSeq() %>"><%= comment.getContent() %></textarea>
 	                    
+	                    <% if(mb.getUid().equals(comment.getUid())){ %>
+	                    <div>
+	                        <a href="/Jboard1/proc/deleteComment.jsp?parent=<%= comment.getParent() %>&seq=<%= comment.getSeq() %>" class="btnCommentDel">삭제</a>
+	                        <a href="#" class="btnCommentModify">수정</a>
+	                        <a href="#" class="btnCommentCancel">취소</a>
+	                    </div>
+	                    <% } %>
 	                </article>
                 <% } %>
                 

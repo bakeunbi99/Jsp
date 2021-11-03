@@ -79,8 +79,10 @@
 			psmt.setInt(1, seq);
 			psmt.setString(2, fname);
 			psmt.setString(3, newName);
+			
 			// 4단계
 			psmt.executeUpdate();
+			
 			// 5단계		
 			// 6단계
 			psmt.close();
@@ -90,8 +92,10 @@
 		}
 	}
 	
+	
 	// 리다이렉트
 	response.sendRedirect("/Jboard1/list.jsp?pg=1");
+	
 %>
 
 

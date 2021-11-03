@@ -3,8 +3,8 @@ package kr.co.jboard1.bean;
 
 public class TermsBean {
 
-	private String terms;		//이용약관
-	private String privacy;		//개인정보
+	private String terms;
+	private String privacy;
 	
 	public String getTerms() {
 		return terms;
@@ -19,5 +19,4 @@ public class TermsBean {
 	public void setPrivacy(String privacy) {
 		this.privacy = privacy;
 	}
-	
 }

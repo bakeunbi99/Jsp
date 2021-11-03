@@ -1,8 +1,12 @@
 package kr.co.jboard2.controller;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 // 컨트롤러 서블릿 서비스 등록 -> web.xml
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.jboard2.service.CommonService;
+import kr.co.jboard2.vo.FileVo;
 
 // 컨트롤러 : 클라이언트에 대한 요청을 처리하는 컴퍼넌트
 public class MainController extends HttpServlet {
@@ -112,6 +117,40 @@ public class MainController extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			out.print(result.substring(5)); // 5부터 자르겠다.
 			
+		}else if(result.startsWith("file:")) { //result 서비스로 부터 리턴 받는 값 'file'
+			
+			// Service에서 저장한 FileVo 객체 Controller에서 꺼내기 ( 클라이언트로 파일 전송 )
+			FileVo fvo = (FileVo) req.getAttribute("fvo");
+			 
+			// 파일 다운로드 response 헤더 수정
+			resp.setContentType("application/octet-stream");
+			resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fvo.getOriName(), "utf-8"));	
+			resp.setHeader("Content-Transfer-Encoding", "binary");
+			resp.setHeader("Pragma", "no-cache");
+			resp.setHeader("Cache-Control", "private");
+			
+			
+			// response 객체 파일 스트림 작업
+			String filePath = req.getServletContext().getRealPath("/file");
+			File file = new File(path+"/" + fvo.getNewName()); //년월일시분초_아이디
+			
+			// 데이터 이동
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+			BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
+			
+			
+			while(true) {
+				int data = bis.read();
+				
+				// 더이상 읽을 데이터가 없을 경우
+				if(data == -1) {
+					break;
+				}
+				
+				bos.write(data);
+			}
+			bos.close();
+			bis.close();
 		}else{
 			// 해당 View로 forward 하기
 			RequestDispatcher dispatcher = req.getRequestDispatcher(result);

@@ -9,6 +9,9 @@
 	
 	String cate = uri.substring(start, end);
 %>
+
+
+
 <section id="board" class="write">
     <h3>글쓰기</h3>
     <article>

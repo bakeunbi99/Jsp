@@ -11,7 +11,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String hp = request.getParameter("hp");
 	
-	//Json출력
 	int result = 0;
 	
 	try{
