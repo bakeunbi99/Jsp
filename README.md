@@ -8,6 +8,7 @@ Jsp 수업예제
 > JSP Scriptlet 실습하기
 > JSP 조건문 실습하기
 > JSP 반복문 실습하기
+> include 실습하기
 
 
 
